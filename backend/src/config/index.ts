@@ -11,6 +11,8 @@ export const config = {
   stacksApiUrl: process.env.STACKS_API_URL || 'https://api.testnet.hiro.so',
   governanceContractAddress: process.env.GOVERNANCE_CONTRACT_ADDRESS || '',
   governanceContractName: process.env.GOVERNANCE_CONTRACT_NAME || 'liable-chocolate-kingfisher',
+  governanceTokenAddress: process.env.GOVERNANCE_TOKEN_ADDRESS || '',
+  governanceTokenName: process.env.GOVERNANCE_TOKEN_NAME || 'worthy-aquamarine-swift',
   delegationContractAddress: process.env.DELEGATION_CONTRACT_ADDRESS || '',
   delegationContractName: process.env.DELEGATION_CONTRACT_NAME || 'delegation',
   
