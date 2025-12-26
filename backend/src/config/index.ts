@@ -15,6 +15,8 @@ export const config = {
   governanceTokenName: process.env.GOVERNANCE_TOKEN_NAME || 'worthy-aquamarine-swift',
   delegationContractAddress: process.env.DELEGATION_CONTRACT_ADDRESS || '',
   delegationContractName: process.env.DELEGATION_CONTRACT_NAME || 'delegation',
+  sip010TraitAddress: process.env.SIP010_TRAIT_ADDRESS || '',
+  sip010TraitName: process.env.SIP010_TRAIT_NAME || 'intimate-rose-bedbug',
   
   // Database
   databaseUrl: process.env.DATABASE_URL || '',
