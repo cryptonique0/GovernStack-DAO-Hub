@@ -1,0 +1,38 @@
+{
+  "name": "governstack-dao-hub",
+  "version": "1.0.0",
+  "description": "Comprehensive Governance DAO platform on Stacks (BTC L2)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "test": "npm run test:contracts && npm run test:frontend && npm run test:backend",
+    "test:contracts": "cd contracts && clarinet test",
+    "test:frontend": "cd frontend && npm run test",
+    "test:backend": "cd backend && npm run test",
+    "deploy:testnet": "clarinet deployments generate --testnet && clarinet deployments apply -p deployments/default.testnet-plan.yaml",
+    "deploy:mainnet": "clarinet deployments generate --mainnet && clarinet deployments apply -p deployments/default.mainnet-plan.yaml",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": [
+    "dao",
+    "governance",
+    "stacks",
+    "bitcoin",
+    "web3",
+    "blockchain",
+    "clarity"
+  ],
+  "author": "GovernStack Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

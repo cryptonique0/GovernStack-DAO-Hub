@@ -1,0 +1,21 @@
+[project]
+name = "governstack-dao"
+description = "A comprehensive Governance DAO platform on Stacks"
+authors = ["GovernStack Team"]
+telemetry = false
+cache_dir = "./.cache"
+requirements = []
+boot_contracts = ["pox", "costs-v2", "bns"]
+
+[repl]
+costs_version = 2
+parser_version = 2
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
