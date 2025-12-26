@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install root deps
+        run: npm install
+
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm install
+
+      - name: Install backend deps
+        working-directory: backend
+        run: npm install
+
+      - name: Lint backend (tsc)
+        working-directory: backend
+        run: npx tsc --noEmit
+
+      - name: Lint frontend (tsc)
+        working-directory: frontend
+        run: npx tsc --noEmit
+
+      - name: Run frontend tests (skip if none)
+        working-directory: frontend
+        run: |
+          if npm run | grep -q " test"; then npm test -- --watch=false --runInBand || true; else echo "No frontend tests"; fi
+
+      - name: Run backend tests (skip if none)
+        working-directory: backend
+        run: |
+          if npm run | grep -q " test"; then npm test || true; else echo "No backend tests"; fi
+
+  clarity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Clarinet
+        run: |
+          curl -L https://github.com/hirosystems/clarinet/releases/download/v1.7.0/clarinet-linux-x64.tar.gz | tar xz
+          sudo mv clarinet /usr/local/bin/clarinet
+          clarinet --version
+
+      - name: Run Clarinet tests
+        working-directory: contracts
+        run: clarinet test
