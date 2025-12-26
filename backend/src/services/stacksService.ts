@@ -150,4 +150,57 @@ export class StacksService {
 
     return txOptions
   }
+
+  // SIP-010 read-only helpers
+  async getTokenName() {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.governanceTokenAddress,
+        contractName: config.governanceTokenName,
+        functionName: 'get-name',
+        functionArgs: [],
+        network: this.network,
+        senderAddress: config.governanceTokenAddress,
+      })
+      // Return Clarity value directly; frontend/backend consumer can parse
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  async getTokenSymbol() {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.governanceTokenAddress,
+        contractName: config.governanceTokenName,
+        functionName: 'get-symbol',
+        functionArgs: [],
+        network: this.network,
+        senderAddress: config.governanceTokenAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  async getTokenDecimals() {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.governanceTokenAddress,
+        contractName: config.governanceTokenName,
+        functionName: 'get-decimals',
+        functionArgs: [],
+        network: this.network,
+        senderAddress: config.governanceTokenAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
 }

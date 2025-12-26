@@ -12,6 +12,7 @@ import treasuryRoutes from './routes/treasury'
 import stakingRoutes from './routes/staking'
 import governanceRoutes from './routes/governance'
 import analyticsRoutes from './routes/analytics'
+import tokenRoutes from './routes/token'
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use('/api/treasury', treasuryRoutes)
 app.use('/api/staking', stakingRoutes)
 app.use('/api/governance', governanceRoutes)
 app.use('/api/analytics', analyticsRoutes)
+app.use('/api/token', tokenRoutes)
 
 // Error handling
 app.use(errorHandler)
