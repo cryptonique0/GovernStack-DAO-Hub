@@ -1,17 +1,18 @@
 import { Request, Response } from 'express'
+import { StacksService } from '../services/stacksService'
+
+const stacks = new StacksService()
 
 export class GovernanceController {
   getParams = async (req: Request, res: Response) => {
     try {
-      res.json({
-        success: true,
-        data: {
-          votingPeriod: 1440,
-          quorumPercentage: 40,
-          proposalThreshold: 1000000,
-          executionDelay: 144
-        }
-      })
+      const [votingPeriodCV, quorumPercentageCV, proposalThresholdCV, executionDelayCV] = await Promise.all([
+        stacks.getVotingPeriod(),
+        stacks.getQuorumPercentage(),
+        stacks.getMinProposalThreshold(),
+        stacks.getExecutionDelay(),
+      ])
+      res.json({ success: true, data: { votingPeriodCV, quorumPercentageCV, proposalThresholdCV, executionDelayCV } })
     } catch (error: any) {
       res.status(500).json({
         success: false,
@@ -82,6 +83,16 @@ export class GovernanceController {
         success: false,
         error: error.message
       })
+    }
+  }
+
+  getProposalState = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params
+      const stateCV = await stacks.getProposalState(Number(id))
+      res.json({ success: true, data: { stateCV } })
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error.message })
     }
   }
 }
