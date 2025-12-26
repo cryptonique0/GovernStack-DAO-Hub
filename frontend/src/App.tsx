@@ -7,7 +7,6 @@ import { CreateProposal } from './pages/CreateProposal'
 import { Treasury } from './pages/Treasury'
 import { Staking } from './pages/Staking'
 import { Governance } from './pages/Governance'
-import { useWalletStore } from './stores/walletStore'
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { Vault, Send, TrendingUp, Download } from 'lucide-react'
+import { Vault, Send, TrendingUp } from 'lucide-react'
 
 export function Treasury() {
   return (
