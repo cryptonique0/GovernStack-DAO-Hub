@@ -10,7 +10,7 @@ export const config = {
   stacksNetwork: process.env.STACKS_NETWORK || 'testnet',
   stacksApiUrl: process.env.STACKS_API_URL || 'https://api.testnet.hiro.so',
   governanceContractAddress: process.env.GOVERNANCE_CONTRACT_ADDRESS || '',
-  governanceContractName: process.env.GOVERNANCE_CONTRACT_NAME || 'governance-core',
+  governanceContractName: process.env.GOVERNANCE_CONTRACT_NAME || 'liable-chocolate-kingfisher',
   delegationContractAddress: process.env.DELEGATION_CONTRACT_ADDRESS || '',
   delegationContractName: process.env.DELEGATION_CONTRACT_NAME || 'delegation',
   
