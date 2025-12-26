@@ -203,4 +203,90 @@ export class StacksService {
       return null
     }
   }
+
+  // Staking read-only helpers
+  async getStake(address: string) {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.stakingContractAddress,
+        contractName: config.stakingContractName,
+        functionName: 'get-stake',
+        functionArgs: [principalCV(address)],
+        network: this.network,
+        senderAddress: config.stakingContractAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  async getTotalStaked() {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.stakingContractAddress,
+        contractName: config.stakingContractName,
+        functionName: 'get-total-staked',
+        functionArgs: [],
+        network: this.network,
+        senderAddress: config.stakingContractAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  async getRewardRate() {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.stakingContractAddress,
+        contractName: config.stakingContractName,
+        functionName: 'get-reward-rate',
+        functionArgs: [],
+        network: this.network,
+        senderAddress: config.stakingContractAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  async calculateRewards(address: string) {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.stakingContractAddress,
+        contractName: config.stakingContractName,
+        functionName: 'calculate-rewards',
+        functionArgs: [principalCV(address)],
+        network: this.network,
+        senderAddress: config.stakingContractAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  async getVotingPower(address: string) {
+    try {
+      const result = await callReadOnlyFunction({
+        contractAddress: config.stakingContractAddress,
+        contractName: config.stakingContractName,
+        functionName: 'get-voting-power',
+        functionArgs: [principalCV(address)],
+        network: this.network,
+        senderAddress: config.stakingContractAddress,
+      })
+      // @ts-ignore
+      return result || null
+    } catch (e) {
+      return null
+    }
+  }
 }
