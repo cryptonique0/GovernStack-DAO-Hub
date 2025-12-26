@@ -17,6 +17,8 @@ export const config = {
   delegationContractName: process.env.DELEGATION_CONTRACT_NAME || 'delegation',
   sip010TraitAddress: process.env.SIP010_TRAIT_ADDRESS || '',
   sip010TraitName: process.env.SIP010_TRAIT_NAME || 'intimate-rose-bedbug',
+  stakingContractAddress: process.env.STAKING_CONTRACT_ADDRESS || '',
+  stakingContractName: process.env.STAKING_CONTRACT_NAME || 'regulatory-orange-dove',
   
   // Database
   databaseUrl: process.env.DATABASE_URL || '',
