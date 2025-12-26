@@ -11,6 +11,8 @@ export const config = {
   stacksApiUrl: process.env.STACKS_API_URL || 'https://api.testnet.hiro.so',
   governanceContractAddress: process.env.GOVERNANCE_CONTRACT_ADDRESS || '',
   governanceContractName: process.env.GOVERNANCE_CONTRACT_NAME || 'governance-core',
+  delegationContractAddress: process.env.DELEGATION_CONTRACT_ADDRESS || '',
+  delegationContractName: process.env.DELEGATION_CONTRACT_NAME || 'delegation',
   
   // Database
   databaseUrl: process.env.DATABASE_URL || '',
