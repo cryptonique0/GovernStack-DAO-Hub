@@ -1,4 +1,7 @@
 import { Request, Response } from 'express'
+import { StacksService } from '../services/stacksService'
+
+const stacks = new StacksService()
 
 export class GovernanceController {
   getParams = async (req: Request, res: Response) => {

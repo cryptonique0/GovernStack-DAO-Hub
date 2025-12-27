@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { StacksService } from '../services/stacksService'
+import { parseStakingInfo, parseStake, parseOptional } from '../utils/clarityParser'
 
 const stacks = new StacksService()
-import { parseCV } from '../utils/clarityParser'
 
 export class StakingController {
   getInfo = async (req: Request, res: Response) => {
@@ -11,9 +11,8 @@ export class StakingController {
         stacks.getTotalStaked(),
         stacks.getRewardRate(),
       ])
-      const totalStaked = parseCV(totalStakedCV)
-      const rewardRate = parseCV(rewardRateCV)
-      res.json({ success: true, data: { totalStaked, rewardRate } })
+      const info = parseStakingInfo(totalStakedCV, rewardRateCV)
+      res.json({ success: true, data: info })
     } catch (error: any) {
       res.status(500).json({
         success: false,
@@ -26,7 +25,7 @@ export class StakingController {
     try {
       const { address } = req.params
       const stakeCV = await stacks.getStake(address)
-      const stake = parseCV(stakeCV)
+      const stake = parseStake(stakeCV)
       res.json({ success: true, data: { stake } })
     } catch (error: any) {
       res.status(500).json({
@@ -86,7 +85,7 @@ export class StakingController {
     try {
       const { address } = req.params
       const rewardsCV = await stacks.calculateRewards(address)
-      const rewards = parseCV(rewardsCV)
+      const rewards = parseOptional(rewardsCV)
       res.json({ success: true, data: { rewards } })
     } catch (error: any) {
       res.status(500).json({
@@ -100,7 +99,7 @@ export class StakingController {
     try {
       const { address } = req.params
       const votingPowerCV = await stacks.getVotingPower(address)
-      const votingPower = parseCV(votingPowerCV)
+      const votingPower = parseOptional(votingPowerCV)
       res.json({ success: true, data: { votingPower } })
     } catch (error: any) {
       res.status(500).json({ success: false, error: error.message })
