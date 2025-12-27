@@ -8,6 +8,7 @@ import {
   listCV,
   bufferCV,
   callReadOnlyFunction,
+  cvToJSON,
 } from '@stacks/transactions'
 import { StacksTestnet, StacksMainnet } from '@stacks/network'
 import { config } from '../config'
@@ -43,10 +44,9 @@ export class StacksService {
         network: this.network,
         senderAddress: config.governanceContractAddress,
       })
-      // The response is a Clarity value; parse minimally
-      // Return raw CV for now; frontend can format as needed
+      // Parse clarity value to JSON-friendly structure
       // @ts-ignore
-      return result?.value || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -61,9 +61,20 @@ export class StacksService {
       network: this.network,
       senderAddress: config.governanceContractAddress,
     })
+    // Parse using cvToJSON for strict JSON compatibility
     // @ts-ignore
-    const val = result?.value?.value
-    return typeof val === 'bigint' ? Number(val) : 0
+    const parsed = result?.value ? cvToJSON(result.value) : null
+    if (!parsed) return 0
+    const v = parsed.value
+    if (typeof v === 'string') {
+      try {
+        return Number(v)
+      } catch (e) {
+        return 0
+      }
+    }
+    if (typeof v === 'number') return v
+    return 0
   }
 
   async createProposalTx(data: any) {
@@ -162,9 +173,9 @@ export class StacksService {
         network: this.network,
         senderAddress: config.governanceTokenAddress,
       })
-      // Return Clarity value directly; frontend/backend consumer can parse
+        // Return parsed JSON
       // @ts-ignore
-      return result || null
+        return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -181,7 +192,7 @@ export class StacksService {
         senderAddress: config.governanceTokenAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -198,7 +209,7 @@ export class StacksService {
         senderAddress: config.governanceTokenAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -216,7 +227,7 @@ export class StacksService {
         senderAddress: config.stakingContractAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -233,7 +244,7 @@ export class StacksService {
         senderAddress: config.stakingContractAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -250,7 +261,7 @@ export class StacksService {
         senderAddress: config.stakingContractAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -267,7 +278,7 @@ export class StacksService {
         senderAddress: config.stakingContractAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
@@ -284,7 +295,7 @@ export class StacksService {
         senderAddress: config.stakingContractAddress,
       })
       // @ts-ignore
-      return result || null
+      return result?.value ? cvToJSON(result.value) : null
     } catch (e) {
       return null
     }
