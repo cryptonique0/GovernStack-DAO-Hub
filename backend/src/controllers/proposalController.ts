@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { StacksService } from '../services/stacksService'
+import { parseCV } from '../utils/clarityParser'
 
 export class ProposalController {
   private stacksService: StacksService
@@ -19,10 +20,9 @@ export class ProposalController {
         offset: Number(offset)
       })
 
-      res.json({
-        success: true,
-        data: proposals
-      })
+      const simplified = proposals.map((p: any) => parseCV(p))
+
+      res.json({ success: true, data: simplified })
     } catch (error: any) {
       res.status(500).json({
         success: false,
@@ -43,10 +43,7 @@ export class ProposalController {
         })
       }
 
-      res.json({
-        success: true,
-        data: proposal
-      })
+      res.json({ success: true, data: parseCV(proposal) })
     } catch (error: any) {
       res.status(500).json({
         success: false,
