@@ -9,6 +9,5 @@ router.put('/params', governanceController.updateParams)
 router.get('/delegation/:address', governanceController.getDelegation)
 router.post('/delegate', governanceController.delegate)
 router.post('/revoke-delegation', governanceController.revokeDelegation)
-router.get('/proposal-state/:id', governanceController.getProposalState)
 
 export default router
