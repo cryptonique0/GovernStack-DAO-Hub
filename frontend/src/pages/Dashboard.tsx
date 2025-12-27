@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useProposalStore } from '../stores/proposalStore'
-import { Plus, TrendingUp, Users, Vote } from 'lucide-react'
+import { Plus, TrendingUp, Users, Vote, FileText, Vault } from 'lucide-react'
 
 export function Dashboard() {
   const navigate = useNavigate()
